@@ -4,6 +4,19 @@
 ## Why
 The ``reinstall-packages`` command of [offical nvm](https://github.com/creationix/nvm) consumes lots of inode when some of the global node modules installed as symbolic links.
 
+## Example
+```bash
+$ nvm current
+> v7.10.1
+
+$ nvm install 8
+$ nvm use 8
+
+$ npm i -g nvm-reinstall-packages
+
+$ nvm-reinstall-packages 7.10.1
+```
+
 ## Install
 ```bash
 npm install nvm-reinstall-packages -g
