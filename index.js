@@ -1,5 +1,5 @@
 const fs = require('fs')
-const path = require('path')
+const { join } = require('path')
 const flatten = require('lodash.flatten')
 const meow = require('meow')
 const execa = require('execa')
@@ -46,6 +46,10 @@ function main () {
   install(pkgs)
 }
 
+function isLink (path) {
+  return fs.lstatSync(path).isSymbolicLink()
+}
+
 function node_modules (version) {
   return `${NVM_DIR}/versions/node/v${version}/lib/node_modules`
 }
@@ -58,11 +62,14 @@ function packages (node_modules) {
       dirs
         .filter((dir) => dir.indexOf('@') === 0)
         .map((namespace) => {
-          return fs.readdirSync(path.join(node_modules, namespace)).map((dir) => `${namespace}/${dir}`)
+          return fs.readdirSync(join(node_modules, namespace))
+            .filter((dir) => !isLink(join(node_modules, namespace, dir)))
+            .map((dir) => `${namespace}/${dir}`)
         })
     ),
     dirs
-      .filter((dir) => dir.indexOf('@') !== 0),
+      .filter((dir) => dir.indexOf('@') !== 0)
+      .filter((dir) => !isLink(join(node_modules, dir))),
   ])
 }
 
