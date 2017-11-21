@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require('fs')
 const { join } = require('path')
 const flatten = require('lodash.flatten')
