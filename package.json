@@ -1,0 +1,15 @@
+{
+  "name": "nvm-reinstall-packages",
+  "version": "0.1.0",
+  "description": "reinstall-packages for nvm",
+  "main": "index.js",
+  "bin": "index.js",
+  "author": "yelo",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "execa": "^0.8.0",
+    "lodash.flatten": "^4.4.0",
+    "meow": "^3.7.0"
+  }
+}
